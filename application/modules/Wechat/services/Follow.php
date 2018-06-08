@@ -160,7 +160,8 @@ class FollowService
     {
         TZ_Loader::service('Foundation', 'Wechat')->writeLog("-------into  responseMsg function body----------");
         //get post data, May be due to the different environments
-        $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
+        //$postStr = $GLOBALS["HTTP_RAW_POST_DATA"]; php7废除
+        $postStr = file_get_contents('php://input');
         TZ_Loader::service('Foundation', 'Wechat')->writeLog($postStr);
 
         //extract post data
