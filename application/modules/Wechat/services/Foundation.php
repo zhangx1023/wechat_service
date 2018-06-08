@@ -120,12 +120,6 @@ class FoundationService
     public function getBasicInfo($openId)
     {
         $appCode = TZ_Loader::model('UserWx', 'Wechat')->select(['openid:eq' => $openId], 'app_code', 'ROW')['app_code'];
-        if(empty($appCode)){
-        	$info=TZ_Loader::model('UserInfo', 'Wechat')->select(['openid:eq' => $openId], '*', 'ROW');
-        	if(!empty($info)){
-        		$appCode='S_DEVICE';
-        	}
-        }
         $wxConfig = TZ_Loader::model('Config', 'Wechat')->select(['app_code:eq' => $appCode], '*', 'ROW');
         return $wxConfig;
     }

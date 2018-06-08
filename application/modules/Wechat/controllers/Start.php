@@ -8,7 +8,6 @@
  */
 class StartController extends Yaf_Controller_Abstract
 {
-	
     /**
      * 测试专用action
      */
@@ -16,8 +15,8 @@ class StartController extends Yaf_Controller_Abstract
     {
         //$result = TZ_Loader::service('Foundation', 'Wechat')->getAccessToken();
         //$result = TZ_Loader::service('Follow', 'Wechat')->getUserInfo('on__dvr330UIrxDQrN5O6b1gaWxo');
-        $result = TZ_Loader::service('Foundation', 'Wechat')->getUserList();
-        print_r($result);
+        //$result = TZ_Loader::service('Foundation', 'Wechat')->getUserList();
+        //print_r($result);
     }
 
     /**
