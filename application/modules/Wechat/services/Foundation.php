@@ -16,6 +16,25 @@ class FoundationService
         self::$redis = TZ_Redis::connect('user');
     }
 
+
+    /**
+     * 创建用户 todo
+     * @param $toUsername
+     * @return mixed
+     */
+    public function createUser($toUsername, $fromUsername)
+    {
+        $appCode = TZ_Loader::model('Config', 'Wechat')->select(['original_id:eq' => $toUsername], 'app_code', 'ROW')['app_code'];
+        $user = [
+            'uid' => TZ_SnowFlake::getId(),
+            'openid' => $fromUsername,
+            'app_code' => $appCode,
+            'created_at' => date('Y-m-d H:i:s')
+        ];
+        TZ_Loader::model('UserWx', 'Wechat')->insert($user);
+        return $appCode;
+    }
+
     /**
      * 获取微信access_token
      * @return array

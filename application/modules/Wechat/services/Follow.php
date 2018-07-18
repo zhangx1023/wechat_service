@@ -238,6 +238,10 @@ class FollowService
         //根据openId,得到公众号相关信息
         //得到相关公众号配置信息
         $appCode = TZ_Loader::model('UserWx', 'Wechat')->select(['openid:eq' => $fromUsername], 'app_code', 'ROW')['app_code'];
+        if (empty($appCode)) { //临时处理方案 todo
+            //用户不存在则插入用户表
+            $appCode = TZ_Loader::service('Foundation', 'Wechat')->createuser($toUsername, $fromUsername);
+        }
         switch ($postObj->Event) {
             case "subscribe":
                 try {
@@ -295,7 +299,7 @@ class FollowService
     }
 
     /**
-     * 处理群发消息事件推送
+     * 处理群发消息事件推送 todo
      */
     public function handleMassMsgCallback($postObj)
     {
@@ -309,7 +313,6 @@ class FollowService
     public function valid()
     {
         $echoStr = $_GET["echostr"];
-
         //valid signature , option
         if ($this->checkSignature()) {
             echo $echoStr;
@@ -323,7 +326,6 @@ class FollowService
      */
     public function checkSignature()
     {
-
         $signature = $_GET["signature"];
         $timestamp = $_GET["timestamp"];
         $nonce = $_GET["nonce"];
