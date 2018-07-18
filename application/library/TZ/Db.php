@@ -114,7 +114,7 @@ class TZ_Db
 		switch ($driver) {
 	
 			case 'MYSQL':
-				$this->_driver = new TZ_Db_Driver_Mysql;
+				$this->_driver = new TZ_Db_Driver_Mysqli;
 				break;
 	
 			default:
